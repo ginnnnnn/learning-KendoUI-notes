@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Getting Started with Kendo UI for jQuery</title>
+
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+
+</head>
+
+<body>
+    <div id="grid"></div>
+    <script>
+        // If an Array value is assigned, it will be treated as the list of commands displayed in the grid's Toolbar. 
+        // Commands can be custom or built-in ("cancel", "create", "save", "excel", "pdf").
+
+        // The "cancel" built-in command reverts any data changes done by the end user.
+
+        // The "create" command adds an empty data item to the grid.
+
+        // The "save" command persists any data changes done by the end user.
+
+        // The "excel" command exports the grid data in MS Excel format.
+
+        // The "pdf" command exports the grid data in PDF format.
+        $("#grid").kendoGrid({
+            toolbar: "<p>My string template in a paragraph.</p>",
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, name: "Jane Doe", age: 30 },
+                    { id: 2, name: "John Doe", age: 33 },
+                ],
+                schema: {
+                    model: { id: "id" }
+                }
+            },
+            editable: true
+        });
+    </script>
+
+    <!-- CONFIGURE THE GRID TOOLBAR TEMPLATE WITH A FUNCTION -->
+    <div id="grid2"></div>
+    <script>
+        $("#grid2").kendoGrid({
+            toolbar: kendo.template("<p>My function template.</p>"),
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, name: "Jane Doe", age: 30 },
+                    { id: 2, name: "John Doe", age: 33 },
+                ],
+                schema: {
+                    model: { id: "id" }
+                }
+            },
+            editable: true
+        });
+    </script>
+    <!-- CONFIGURE THE GRID TOOLBAR AS AN ARRAY OF COMMANDS -->
+
+    <div id="grid3"></div>
+    <script>
+        $("#grid3").kendoGrid({
+            toolbar: [
+                { name: "create", text: "add poo" },
+                { name: "save" },
+                { name: "cancel" }
+            ],
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, name: "Jane Doe", age: 30 },
+                    { id: 2, name: "John Doe", age: 33 },
+                ],
+                schema: {
+                    model: { id: "id" }
+                }
+            },
+            editable: true
+        });
+    </script>
+    <!-- icon  -->
+
+    <div id="grid4"></div>
+    <script>
+        $("#grid4").kendoGrid({
+            toolbar: [
+                { name: "copy", iconClass: "k-icon k-i-copy" },
+                { name: "save" },
+                { name: "custom" }
+            ],
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, name: "Jane Doe", age: 30 },
+                    { id: 2, name: "John Doe", age: 33 }
+                ],
+                schema: {
+                    model: { id: "id" }
+                }
+            },
+            editable: true
+        });
+    </script>
+    toolbar.name String
+    <!-- The name of the toolbar command. Either a built-in ("cancel", "create", "save", "excel", "pdf") or custom. The name is reflected in one of the CSS classes, which is applied to the button - k-grid-name. This class can be used to obtain reference to the button after Grid initialization and attach click handlers. -->
+    <div id="grid5"></div>
+    <script>
+        $("#grid5").kendoGrid({
+            toolbar: [
+                { name: "create" },
+                { name: "save" },
+                { name: "custom" }
+            ],
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, name: "Jane Doe", age: 30 },
+                    { id: 2, name: "John Doe", age: 33 }
+                ],
+                schema: {
+                    model: { id: "id" }
+                }
+            },
+            editable: true
+        });
+
+        $(".k-grid-custom").click(function (e) {
+            // handler body
+        });
+    </script>
+
+    <div id="grid6"></div>
+    <script id="template" type="text/x-kendo-template">
+            <a class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
+            </script>
+    <script>
+        function toolbar_click() {
+            console.log("Toolbar command is clicked!");
+            return false;
+        }
+        $("#grid6").kendoGrid({
+            toolbar: [
+                { template: kendo.template($("#template").html()) }
+            ],
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: [
+                { name: "Jane Doe", age: 30 },
+                { name: "John Doe", age: 33 }
+            ]
+        });
+    </script>
+
+
+    <div id="grid7"></div>
+    <script>
+        function toolbar_click() {
+            console.log("Toolbar command is clicked!");
+            return false;
+        }
+        $("#grid7").kendoGrid({
+            toolbar: [
+                {
+                    template: '<a class="k-button" href="\\#" onclick="return toolbar_click()">Command</a>'
+                }
+            ],
+            columns: [
+                { field: "name" },
+                { field: "age" }
+            ],
+            dataSource: [
+                { name: "Jane Doe", age: 30 },
+                { name: "John Doe", age: 33 }
+            ]
+        });
+    </script>
+</body>
+
+</html>

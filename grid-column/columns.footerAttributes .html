@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Getting Started with Kendo UI for jQuery</title>
+
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+
+</head>
+
+<body>
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [
+                { field: "name" },
+                {
+                    field: "age",
+                    footerTemplate: "Min: #: min # Max: #: max #",
+                    footerAttributes: {
+                        "class": "table-footer-cell",
+                        style: "text-align: right; font-size: 14px"
+                    }
+                }
+            ],
+            dataSource: {
+                data: [
+                    { name: "Jane Doe", age: 30 },
+                    { name: "John Doe", age: 33 }
+                ],
+                aggregate: [
+                    { field: "age", aggregate: "min" },
+                    { field: "age", aggregate: "max" }
+                ]
+            }
+        });
+    </script>
+</body>
+
+</html>

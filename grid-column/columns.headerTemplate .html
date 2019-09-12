@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Getting Started with Kendo UI for jQuery</title>
+
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+
+</head>
+
+<body>
+    <div id="grid"></div>
+    <script>
+        $("#grid").kendoGrid({
+            columns: [{
+                field: "name",
+                headerTemplate: '<input type="checkbox" id="check-all" /><label for="check-all">Check All</label>'
+            }],
+            dataSource: [{ name: "Jane Doe" }, { name: "John Doe" }]
+        });
+    </script>
+
+    <div id="grid2"></div>
+    <script>
+        $("#gri2d").kendoGrid({
+            columns: [{
+                field: "name",
+                headerTemplate: kendo.template('# if (true) { # <input type="checkbox" id="check-all" /><label for="check-all">Check All</label> # } else { # this will never be displayed # } #')
+            }],
+            dataSource: [{ name: "Jane Doe" }, { name: "John Doe" }]
+        });
+    </script>
+</body>
+
+</html>
