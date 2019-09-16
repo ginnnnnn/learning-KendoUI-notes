@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Getting Started with Kendo UI for jQuery</title>
+
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+
+</head>
+
+<body>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
+                    dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                    data: { q: "html5" } // search for tweets that contain "html5"
+                }
+            },
+            schema: {
+                data: function (response) {
+                    return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
+                }
+            }
+        });
+        dataSource.fetch(function () {
+            var data = this.data();
+            console.log(data.length);
+        });
+    </script>
+    schema.data Function|String
+    <!-- The field from the server response which contains the data items.
+     Can be set to a function which is called to return the data items for the response. -->
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
+                    dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                    data: { q: "html5" } // search for tweets that contain "html5"
+                }
+            },
+            schema: {
+                data: "statuses" // twitter's response is { "statuses": [ /* results */ ] }
+            }
+        });
+        dataSource.fetch(function () {
+            var data = this.data();
+            console.log(data.length);
+        });
+    </script>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
+                    dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+                    data: { q: "html5" } // search for tweets that contain "html5"
+                }
+            },
+            schema: {
+                data: function (response) {
+                    return response.statuses; // twitter's response is { "statuses": [ /* results */ ] }
+                }
+            }
+        });
+        dataSource.fetch(function () {
+            var data = this.data();
+            console.log(data.length);
+        });
+    </script>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "https://www.mocky.io/v2/5ad0597a3100004f004eac46",
+                }
+            },
+            schema: {
+                data: "items",
+                errors: function (response) {
+                    console.log("errors as function", response.errors[0])
+                    return response.errors;
+                }
+            },
+            error: function (e) {
+                console.log("error event handler", e.errors[0]);
+            }
+        });
+        dataSource.fetch();
+    </script>
+
+    <!-- schema.model Object|kendo.data.Model
+    The data item (model) configuration.
+    If set to an object, the Model.define method will be used to initialize the data source model.
+    If set to an existing kendo.data.Model instance, the data source will use that instance and will not initialize a
+    new one. -->
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: {
+                            //this field will not be editable (default value is true)
+                            editable: false,
+                            // a defaultValue will not be assigned (default value is false)
+                            nullable: true
+                        },
+                        ProductName: {
+                            //set validation rules
+                            validation: { required: true }
+                        },
+                        UnitPrice: {
+                            //data type of the field {Number|String|Boolean|Date} default is String
+                            type: "number",
+                            // used when new model is created
+                            defaultValue: 42,
+                            validation: { required: true, min: 1 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
